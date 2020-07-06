@@ -10,9 +10,9 @@
         public function validate(){
 
             require_once('vendor/autoload.php');
-           \Stripe\Stripe::setApiKey('sk_test_51H1rhZIb3MvN5ZfV1cCdPlVSdQcpuSNttuQYIBUlYheclHB3NjGXjB7BW05ihV3Q0jKeu0hUCLxxccCg2PEHbVKv00NGGfVmqI');
+           \Stripe\Stripe::setApiKey('sk_test_51H0SnXBzzr6tYjTOFwKgB8G2SPHXMFrspc1LdLsSlsH23vgSnEIY7rMqlYrP4OTIIDuvkDPt20I0bphEljgx4h7D00DWkj3Ded');
             $stripe = new \Stripe\StripeClient(
-                'sk_test_51H1rhZIb3MvN5ZfV1cCdPlVSdQcpuSNttuQYIBUlYheclHB3NjGXjB7BW05ihV3Q0jKeu0hUCLxxccCg2PEHbVKv00NGGfVmqI'
+                'sk_test_51H0SnXBzzr6tYjTOFwKgB8G2SPHXMFrspc1LdLsSlsH23vgSnEIY7rMqlYrP4OTIIDuvkDPt20I0bphEljgx4h7D00DWkj3Ded'
             );
             // sanitize  post array
             $POST =  filter_var_array($_POST, FILTER_SANITIZE_STRING);
@@ -21,41 +21,43 @@
             $nom    = $POST['nom'];
             $email  = $POST['email'];
             $token  = $POST['stripeToken'];
-           // echo $prenom.'<br>'.$nom.'<br>'.$email.'<br>'.$token.'<br>success';
+            //echo $prenom.'<br>'.$nom.'<br>'.$email.'<br>'.$token.'<br>success';
 
              // Create Customer In Stripe
-//            $customer = \Stripe\Customer::create(array(
-//               "email"  => $email,
-//               "source" => $token
-//            ));
-            $customer = $stripe->customers->create([
-                'description' => 'My First Test Customer (created for API docs)',
+            $customer = \Stripe\Customer::create(array(
                 "email"  => $email,
-                "source" => $token,
-            ]);
+                "source" => $token
+            ));
             print_r($customer);
 
-            /*// Create card
+           /* $customer = $stripe->customers->create(array(
+                'description' => 'Customer test',
+                "email"  => $email,
+                //"source" => $token
+            ));
+            print_r($customer);
+*/
+            // Create card
             $card = $stripe->customers->createSource(
                 $customer->id,
                 array('source' => $token)
             );
-            print_r($card);
+            //print_r($card);
 
 
             // payment
             $intent = \Stripe\PaymentIntent::create(array(
-                'payment_method_types' => array('card'),
-                "amount"      => 8000,
+                "amount"      => 16000,
                 "currency"    => "usd",
+                'payment_method_types' => array('card'),
                 "description" => "test2",
-                "payment_method" => $card->id,
-                "application_fee_amount" => 1000
+                "application_fee_amount" => 7000,
             ),
                 array(
-                    'stripe_account' => 'acct_1H0SnXBzzr6tYjTO'
+                    'stripe_account' => 'acct_1H01UmCzQGljWAqJ'
                 )
                 );
+            print_r($intent);
 
 //            print_r($charge);
             /*$intent = $stripe->paymentIntents->create(array(
