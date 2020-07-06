@@ -11,7 +11,9 @@
 
             require_once('vendor/autoload.php');
            \Stripe\Stripe::setApiKey('sk_test_51H01UmCzQGljWAqJjbHcii6ZJMFD9fgdFuH9TayfonSpe1o4VYIOfU5H4WlIQ6DibBcjGeqnhtzKTtwoAsjhE64h00qlsIyhh0');
-
+            $stripe = new \Stripe\StripeClient(
+                'sk_test_51H01UmCzQGljWAqJjbHcii6ZJMFD9fgdFuH9TayfonSpe1o4VYIOfU5H4WlIQ6DibBcjGeqnhtzKTtwoAsjhE64h00qlsIyhh0'
+            );
             // sanitize  post array
             $POST =  filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
@@ -22,10 +24,15 @@
            // echo $prenom.'<br>'.$nom.'<br>'.$email.'<br>'.$token.'<br>success';
 
              // Create Customer In Stripe
-            $customer = \Stripe\Customer::create(array(
-               "email"  => $email,
-               "source" => $token
-            ));
+//            $customer = \Stripe\Customer::create(array(
+//               "email"  => $email,
+//               "source" => $token
+//            ));
+            $customer = $stripe->customers->create([
+                'description' => 'My First Test Customer (created for API docs)',
+                "email"  => $email,
+                "source" => $token,
+            ]);
             print_r($customer);
 
             /*// Create card
