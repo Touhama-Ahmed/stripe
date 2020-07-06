@@ -10,9 +10,9 @@
         public function validate(){
 
             require_once('vendor/autoload.php');
-           \Stripe\Stripe::setApiKey('sk_test_51H01UmCzQGljWAqJjbHcii6ZJMFD9fgdFuH9TayfonSpe1o4VYIOfU5H4WlIQ6DibBcjGeqnhtzKTtwoAsjhE64h00qlsIyhh0');
+           \Stripe\Stripe::setApiKey('sk_test_51H1rhZIb3MvN5ZfV1cCdPlVSdQcpuSNttuQYIBUlYheclHB3NjGXjB7BW05ihV3Q0jKeu0hUCLxxccCg2PEHbVKv00NGGfVmqI');
             $stripe = new \Stripe\StripeClient(
-                'sk_test_51H01UmCzQGljWAqJjbHcii6ZJMFD9fgdFuH9TayfonSpe1o4VYIOfU5H4WlIQ6DibBcjGeqnhtzKTtwoAsjhE64h00qlsIyhh0'
+                'sk_test_51H1rhZIb3MvN5ZfV1cCdPlVSdQcpuSNttuQYIBUlYheclHB3NjGXjB7BW05ihV3Q0jKeu0hUCLxxccCg2PEHbVKv00NGGfVmqI'
             );
             // sanitize  post array
             $POST =  filter_var_array($_POST, FILTER_SANITIZE_STRING);

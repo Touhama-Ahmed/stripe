@@ -1,5 +1,5 @@
 // Create a Stripe client.
-var stripe = Stripe('pk_test_51H01UmCzQGljWAqJIOAYLaIJIY8qBv499L2MyHdBP2sEtPUSdxUvWLd6EUgVC1pl48XY4E9jtMD1vdU0Gq1ohNt600xQpmxf06');
+var stripe = Stripe('pk_test_51H1rhZIb3MvN5ZfVf7vi0IaD0lGJH40Z4u6gTi2WhMMYm5qDp3deTi4eRLxtgCdWqN2AmCiaijQfqDEft8n69pVb00z23Q0S9s');
 
 // Create an instance of Elements.
 var elements = stripe.elements();
@@ -22,7 +22,7 @@ var style = {
     }
 };
 // Style button with BS
-document.querySelector('#payment-form button').classList='btn btn-primary btn-block mt-4';
+document.querySelector('#payment-form button').classList='btn btn-dark btn-block mt-4';
 
 // Create an instance of the card Element.
 var card = elements.create('card', {style: style});
@@ -44,7 +44,7 @@ card.on('change', function(event) {
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
     event.preventDefault();
-
+       console.log("okkkk")
     stripe.createToken(card).then(function(result) {
         if (result.error) {
             // Inform the user if there was an error.
