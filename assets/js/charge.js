@@ -1,16 +1,5 @@
-// Set the connected Stripe Account to collect payments on behalf of that account
-var stripe = Stripe('pk_test_51H01UmCzQGljWAqJCE3LZvSY0JN4xWKwrPxCeb2SwGA3EOru6rTPnTR7FDC24cXs7UIw0dMskktTTGiUFLfm0IDD00stVTv7ME'
-    , {
-        stripeAccount: "acct_1H0SnXBzzr6tYjTO"
-    }
-);
-//secret client
-var response = fetch('/secret').then(function(response) {
-    return response.json();
-}).then(function(responseJson) {
-    var clientSecret = responseJson.client_secret;
-    // Call stripe.confirmCardPayment() with the client secret.
-});
+// Create a Stripe client.
+var stripe = Stripe('pk_test_51H01UmCzQGljWAqJIOAYLaIJIY8qBv499L2MyHdBP2sEtPUSdxUvWLd6EUgVC1pl48XY4E9jtMD1vdU0Gq1ohNt600xQpmxf06');
 
 // Create an instance of Elements.
 var elements = stripe.elements();
@@ -81,10 +70,3 @@ function stripeTokenHandler(token) {
     // Submit the form
     form.submit();
 }
-
-var response = fetch('/secret').then(function(response) {
-    return response.json();
-}).then(function(responseJson) {
-    var clientSecret = responseJson.client_secret;
-    // Call stripe.confirmCardPayment() with the client secret.
-});

@@ -1,10 +1,4 @@
 <?php
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Stripe\Stripe;
-
-require_once('vendor/autoload.php');
-
 
 
 	class Pay extends CI_Controller{
@@ -15,10 +9,9 @@ require_once('vendor/autoload.php');
 
         public function validate(){
 
+            require_once('vendor/autoload.php');
+           \Stripe\Stripe::setApiKey('sk_test_51H01UmCzQGljWAqJjbHcii6ZJMFD9fgdFuH9TayfonSpe1o4VYIOfU5H4WlIQ6DibBcjGeqnhtzKTtwoAsjhE64h00qlsIyhh0');
 
-            \Stripe\Stripe::setApiKey('sk_test_51H01UmCzQGljWAqJ8VsBymG2p5ZvDYXdBibsMdWo0RVLuCvrnnr3L9oCcAizuDYvKiLBMf0jXMhtiClkj4uKz0mb00aXuXNMv9');
-
-            $stripe = new \Stripe\StripeClient('sk_test_51H01UmCzQGljWAqJ8VsBymG2p5ZvDYXdBibsMdWo0RVLuCvrnnr3L9oCcAizuDYvKiLBMf0jXMhtiClkj4uKz0mb00aXuXNMv9');
             // sanitize  post array
             $POST =  filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
@@ -26,12 +19,12 @@ require_once('vendor/autoload.php');
             $nom    = $POST['nom'];
             $email  = $POST['email'];
             $token  = $POST['stripeToken'];
-            //echo $prenom.'<br>'.$nom.'<br>'.$email.'<br>'.$token.'<br>success';
+           // echo $prenom.'<br>'.$nom.'<br>'.$email.'<br>'.$token.'<br>success';
 
-            // Create Customer In Stripe
-            $customer = $stripe->customers->create(array(
-                "email"  => $email,
-                "source" => $token
+             // Create Customer In Stripe
+            $customer = \Stripe\Customer::create(array(
+               "email"  => $email,
+               "source" => $token
             ));
             print_r($customer);
 
@@ -73,5 +66,6 @@ require_once('vendor/autoload.php');
             } else {
                 $this->load->view('stripe/index');
             }*/
+
         }
     }
